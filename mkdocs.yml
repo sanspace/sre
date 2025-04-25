@@ -1,0 +1,4 @@
+site_name: SRE
+site_url: https://sanspace.in/sre
+theme:
+  name: material
