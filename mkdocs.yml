@@ -1,4 +1,137 @@
 site_name: SRE
 site_url: https://sanspace.in/sre
+repo_url: https://github.com/sanspace/sre
+repo_name: sanspace / sre
+edit_uri: edit/main/docs/
 theme:
   name: material
+  favicon: images/favicon.ico
+  icon:
+    logo: material/smoke-detector-variant
+    repo: fontawesome/brands/git-alt
+    edit: material/pencil
+    view: material/eye
+  palette: 
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.instant # behave like a Single Page App
+    - navigation.instant.progress # for slow connections, show loading progress
+    - navigation.tracking # anchor tracking
+    - navigation.tabs # show navbar below the top
+    - navigation.path # bread crumbs
+    - navigation.indexes
+    - navigation.top # back to top
+    - navigation.footer # enable back and next
+    - toc.follow # anchor following
+    - toc.integrate # nav integration
+    - search.suggest # autocomplete
+    - search.highlight 
+    - search.share
+    - content.action.view # requries edit_uri
+    - content.action.edit # requries edit_uri
+    - content.code.copy # requires md extensions
+    - content.code.annotate
+    - content.tabs.link
+    - content.tooltips
+
+plugins:
+  - search
+  - tags
+  - offline
+  - glightbox
+  - social:
+      enabled: !ENV [CI, false]
+  - git-revision-date-localized:
+      type: date
+      fallback_to_build_date: true
+      enable_creation_date: true
+      enabled: !ENV [CI, false]
+  - git-committers:
+      repository: sanspace/sre
+      branch: main
+      enabled: !ENV [CI, false]
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.betterem
+  - pymdownx.blocks.caption
+  - toc:
+      permalink: true
+      permalink_title: Anchor link to this section for reference
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.highlight:
+      use_pygments: true
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+      auto_title: true
+      linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - footnotes
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.details
+  - pymdownx.smartsymbols
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/sanspace/sre
+
+  analytics: 
+    feedback:
+      title: Was this page helpful?
+      ratings:
+        - icon: material/thumb-up-outline
+          name: This page was helpful
+          data: 1
+          note: >-
+            Thanks for your feedback!
+        - icon: material/thumb-down-outline
+          name: This page could be improved
+          data: 0
+          note: >- 
+            Thanks for your feedback! Help us improve this page by
+            using our <a href="https://github.com/sanspace/sre/issues/new/?title=[Feedback]+{title}+-+{url}" target="_blank" rel="noopener">feedback form</a>.
+
+copyright: Copyright &copy; 2025 San Srinivasan
