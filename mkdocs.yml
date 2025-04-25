@@ -1,8 +1,21 @@
 site_name: SRE
+site_description: SRE prep site with topics and material for the role.
 site_url: https://sanspace.in/sre
+
+nav:
+  - Home: index.md
+  - 'Linux Fundamentals': # <-- New Section
+    - 'Processes': 'linux/processes.md'
+    - 'Memory Management': 'linux/memory.md'
+    - 'CPU Management': 'linux/cpu.md'
+    - 'Disk Space & I/O': 'linux/disk.md'
+  - About: about.md
+
+
 repo_url: https://github.com/sanspace/sre
 repo_name: sanspace / sre
 edit_uri: edit/main/docs/
+
 theme:
   name: material
   favicon: images/favicon.ico
