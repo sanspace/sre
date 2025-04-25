@@ -1,0 +1,42 @@
+name: ci 
+on:
+  push:
+    branches:
+      - main
+permissions:
+  contents: write
+jobs:
+  deploy:
+    name: mkdocs-build
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout
+      - uses: actions/checkout@v4
+      - name: Configure Git Credentials
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+      # Setup UV
+      - name: Install UV
+        uses: astral-sh/setup-uv@v5
+        with:
+            # Install specific version of uv
+            version: "0.6.16"
+      # Set up Python - Using GHA python to take advantage of the GH cache
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: ".python-version"
+      # Cache
+      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
+      - uses: actions/cache@v4
+        with:
+          key: mkdocs-material-${{ env.cache_id }}
+          path: .cache 
+          restore-keys: |
+            mkdocs-material-
+      # Install Dependencies
+      - name: Install the project
+        run: uv sync --locked --all-extras --dev
+      # Build the Project
+      - name: Build the Project
+        run: uv run mkdocs gh-deploy --force
